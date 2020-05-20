@@ -1,0 +1,114 @@
+
+
+ <!--------------------------COMPONENTS  ----------------------->
+
+ <!-- Global -->
+ <!-- qpp.js -->
+you must create a component using Vue.component 
+add template and other properties(data, methods, etc)
+create a new Vue instance with the el: selector
+
+Vue.component('click-counter', {
+    template: '<button @click=count++> {{count}}</button>',
+    data () {
+        return { count: 0}
+        }
+});
+
+Vue.component('my-comp', {
+    data: function () {
+        return { status: 'Critical' }
+    },
+    template: '<p>Server Status: {{ status}} (<button @click="changeStatus"> Change </button>) </p>',
+    methods: {
+        changeStatus () {this.status = 'Normal' }
+    },
+});
+
+new Vue( { el: '#app', })
+ <!-- both of these components can use the Vue instance below as long the components are in the same div with #app -->
+
+ <div id="app">
+     <my-comp></my-comp>
+     <click-counter></click-counter>
+ </div>
+
+<!-- LOCAL COMPONENTS -->
+1. define the component
+2. create a new Vue instance 
+    2a. add el and register component 
+
+const local = {
+    data() {
+        return { msg: 'This is my local component' }
+    },
+    template: <p>Hello, {{ msg }}</p>
+}
+
+new Vue({
+    el: '#app2',
+    components: {'local': local}
+})
+
+<div id="app2">
+    <local></local>
+</div>
+
+<!-- Alternative Component style -->
+1. By adding the new Vue instance to the main.js file, you do not have to set it up in the local script section.
+    <!-- main.js -->
+        import Vue from 'vue'
+        import App from './App.vue'
+        import from Home './Home.vue'
+
+        vue.Component('alternative, Home');
+
+        new Vue({
+            el: '#home',
+            render: h => h(App)
+        })
+    <!-- Home.vue script  -->
+    export default {
+        data () {
+            present: 'Is Jenna here?'
+        },
+        methods: {
+            answer() {
+                this.present = 'Yes'
+            }
+        }
+    }
+    <!-- Home.vue-->
+        <div id="app">
+            <p> {{ present }}</p>
+            <button @click='answer'>Click if present</button>
+        </div>
+
+<!-- Import Component -->
+1. Create component_name.vue
+2. In script property add a 'name: component_name'
+2. Import it into the view file it will be rendered to 
+        2a. import  component_name from '@/components/component_name.vue'
+
+        <!-- // import HelloWorld from '@/components/HelloWorld.vue' -->
+<!-- Special Elements -->
+Primarily used for dynamic components with the is attribute:
+<component :is="componentId"></component>
+
+1. Content elements serve as content insertion outlets in component templates
+2. Select attribute is optional
+3. Attribute should be a valid CSS selector
+<content select="li"></content>
+
+Partial contents serve as outlets for registered partials
+2. Name attribute is required
+
+<!-- a static partial -->
+<partial name="my-partial"></partial>
+
+<!-- a dynamic partial -->
+<partial name="{{partialId}}"></partial>
+
+<!-- registering a partial -->
+Vue.partial {'my-partial',
+'<p>This is a partial! {{msg}}</p>'}

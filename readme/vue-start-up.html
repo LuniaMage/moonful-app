@@ -1,0 +1,86 @@
+<!-- For instant prototyping & testing purposes -->
+1. create project directory & cd into
+2. create App.vue file 
+3. npm install -g @vue/cli @vue/cli-service-global
+4. vue serve
+
+<!-- Create a new project -->
+    <!-- Installation -->
+    npm install -g @vue/cli
+    <!-- Create a proect -->
+    1. vue create my-project
+    2. follow set-up instructions
+    3. cd my-app 
+    4. npm run serve 
+
+<!-- Start-up templates -->
+    <template>
+        <div id="#app"></div>
+    </template>
+    <script>
+        var app = new Vue ({
+            el: '#app',
+            data: {
+                msg: 'Hello Vue!'
+            }
+        })
+    </script>
+
+<!-- Script templates -->
+    <!-- Single file setup -->
+    <script>
+        module.exports = {
+            data: function ( ) {
+                return {
+                    greeting: 'Hello'
+                }
+            }
+        }
+    </script>
+
+    <!-- Complex  setup-->
+<script>
+    export default {
+        data ( ) {
+            return {
+                greeting: 'Hello'
+            }
+        },
+        components: {
+            newComponent
+        }
+    }
+</script>
+
+
+<!-- Directory Setup -->
+    <!-- src/views/App.vue  -->
+    ~ App.vue is a root file. Use it to store componets that are used throughout entire site.
+    delete src/view/HelloWorld.vue
+    <template>
+        <div id="app">
+             <Navbar />
+        </div>
+    </template>
+
+    <!-- src/views/Home.vue -->
+<template>
+    <div class="home">{{ greeting }}</div>
+  </template>
+  <script>
+  // @ is an alias to /src
+  import Navbar from '@/components/Navbar'
+  
+  export default {
+    name: 'Home',
+    data () {
+      return { 
+        greeting: 'Home Page'
+       }
+    },
+    components: {
+        Navbar,
+    }
+  }
+  </script>
+  <style lang=""></style>
